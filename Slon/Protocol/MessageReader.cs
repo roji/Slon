@@ -308,7 +308,8 @@ ref struct MessageReader<THeader> where THeader : struct, IHeader<THeader>, IEqu
     {
         if (_reader.TryReadTo(out ReadOnlySequence<byte> strBytes, 0))
         {
-            value = encoding.GetString(strBytes);
+            // value = encoding.GetString(strBytes);
+            value = Encoding.UTF8.GetString(strBytes);
             return true;
         }
 

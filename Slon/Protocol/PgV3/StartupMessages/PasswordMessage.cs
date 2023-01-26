@@ -28,8 +28,10 @@ readonly struct PasswordMessage : IFrontendMessage
 
     internal static string HashPassword(string username, string plainPassword, ReadOnlySpan<byte> salt, Encoding encoding)
     {
-        if (plainPassword is null || salt.Length != 4)
-            throw new Exception();
+        if (plainPassword is null)
+            throw new Exception("plainPassword is null");
+        // if (salt.Length != 4)
+            // throw new Exception($"Salt length is {salt.Length}");
 
         var plaintext = ArrayPool<byte>.Shared.Rent(encoding.GetByteCount(plainPassword) + encoding.GetByteCount(username));
         var passwordEncodedCount = encoding.GetBytes(plainPassword.AsSpan(), plaintext);

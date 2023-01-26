@@ -566,7 +566,7 @@ class PgV3Protocol : Protocol
                         break;
                     case AuthenticationType.CleartextPassword:
                     default:
-                        throw new Exception();
+                        throw new Exception($"Unexpected auth message type: {msg.AuthenticationType}");
                 }
 
                 // Safe to change outside lock, we haven't exposed the instance yet.
